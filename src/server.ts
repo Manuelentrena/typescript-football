@@ -18,12 +18,14 @@ export default function createServer() {
           date: match.date,
         });
       }
-    } catch (error) {
-      res.status(400).json({
-        error: error,
-      });
+    } catch (e) {
+      if (e instanceof Error) {
+        res.status(400).json({
+          error: e.message,
+        });
+      }
     }
-    res.send(`Resultados del ${req.params.team1} vs ${req.params.team2}`);
+    /* res.send(`Resultados del ${req.params.team1} vs ${req.params.team2}`); */
   });
   return app;
 }
